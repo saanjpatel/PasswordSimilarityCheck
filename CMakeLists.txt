@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(PasswordSimilarityCheck
-        Hash.cpp
-        Hash.h
-        main.cpp
-        PrefixTree.cpp
-        PrefixTree.h)
+        src/Hash.cpp
+        src/Hash.h
+        src/main.cpp
+        src/PrefixTree.cpp
+        src/PrefixTree.h)
