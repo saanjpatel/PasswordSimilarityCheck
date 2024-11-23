@@ -10,8 +10,19 @@ int main() {
     ifstream file("rockyou.txt");
     string password;
     PrefixTree tree;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 100000; i++) {
         getline(file, password);
         tree.insert(password);
+    }
+    file.close();
+    cout << "Input password to check: ";
+    string input;
+    getline(cin, input);
+    bool check = tree.searchString(input);
+    if (check) {
+        cout << "true" << endl;
+    }
+    if (!check) {
+        cout << "false" << endl;
     }
 }

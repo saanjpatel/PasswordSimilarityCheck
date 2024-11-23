@@ -34,3 +34,26 @@ Node* PrefixTree::insertCharHelper(Node *node, string password, int count) {
 void PrefixTree::insert(string password) {
     this->root = insertCharHelper(this->root, password,0);
 }
+bool PrefixTree::searchStringHelper(Node *node, string password, int count) {
+    while (count < password.length()) {
+        bool checkchar = false;
+        for (int i = 0; i < node->children.size(); i++) {
+            if (node->children.at(i)->let == password.at(count)) {
+                checkchar = true;
+                node = node->children.at(i);
+                count += 1;
+                break;
+            }
+        }
+        if (!checkchar) {
+            return false;
+        }
+
+    }
+    return true;
+
+}
+bool PrefixTree::searchString(string password) {
+    bool stringInTree = searchStringHelper(this->root, password, 0);
+    return stringInTree;
+}

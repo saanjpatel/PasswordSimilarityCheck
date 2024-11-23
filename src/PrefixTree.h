@@ -22,7 +22,9 @@ class PrefixTree {
 private:
     Node* root = new Node();
     Node* insertCharHelper(Node* node, string password, int count);
+    bool searchStringHelper(Node* node, string password, int count);
 public:
     void insert(string password);
+    bool searchString(string password);
 };
 #endif //PASSWORDSIMILARITYCHECK_PREFIXTREE_H
