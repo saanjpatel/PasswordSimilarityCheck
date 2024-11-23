@@ -10,19 +10,41 @@ int main() {
     ifstream file("rockyou.txt");
     string password;
     PrefixTree tree;
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 5; i++) {
         getline(file, password);
         tree.insert(password);
     }
     file.close();
-    cout << "Input password to check: ";
-    string input;
-    getline(cin, input);
-    bool check = tree.searchString(input);
-    if (check) {
-        cout << "true" << endl;
-    }
-    if (!check) {
-        cout << "false" << endl;
+    bool continueLoop = true;
+    while (continueLoop) {
+        cout << "Please input a number to pick a menu option." << endl;
+        cout << "1. Check Password Using Prefix Tree." << endl;
+        cout << "2. Check Password Using Hash Table." << endl;
+        cout << "3. Exit" << endl;
+        string input;
+        getline(cin, input);
+        int inputNum = stoi(input);
+        if (inputNum == 3) {
+            cout << "Exited program successfully." << endl;
+            continueLoop = false;
+            break;
+        }
+        if (inputNum == 1 or inputNum == 2) {
+            cout << "Please input a password to check." << endl;
+            string passInput;
+            getline(cin, passInput);
+            if (inputNum == 1) {
+                bool prefixCheck = tree.searchString(passInput);
+                if (prefixCheck) {
+                    cout << "Password is commonly used." << endl;
+                }
+                if (!prefixCheck) {
+                    cout << "Password is not commonly used." << endl;
+                }
+            }
+            if (inputNum == 2) {
+                //NOTE: add similar functionality for hash
+            }
+        }
     }
 }
