@@ -23,8 +23,10 @@ private:
     Node* root = new Node();
     Node* insertCharHelper(Node* node, string password, int count);
     bool searchStringHelper(Node* node, string password, int count);
+    void deletepostOrderTraversal(Node* node);
 public:
     void insert(string password);
     bool searchString(string password);
+    ~PrefixTree();
 };
 #endif //PASSWORDSIMILARITYCHECK_PREFIXTREE_H

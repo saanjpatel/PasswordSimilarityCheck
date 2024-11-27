@@ -57,3 +57,12 @@ bool PrefixTree::searchString(string password) {
     bool stringInTree = searchStringHelper(this->root, password, 0);
     return stringInTree;
 }
+void PrefixTree::deletepostOrderTraversal(Node *node) {
+    for (int i = 0; i < node->children.size(); i++) {
+        deletepostOrderTraversal(node->children.at(i));
+    }
+    delete node;
+}
+PrefixTree::~PrefixTree() {
+    deletepostOrderTraversal(this->root);
+}
