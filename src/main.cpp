@@ -2,6 +2,7 @@
 using namespace std;
 #include <fstream>
 #include "PrefixTree.h"
+#include "Hash.h"
 //
 // Created by Saanj Patel on 11/22/2024.
 //
@@ -10,9 +11,11 @@ int main() {
     ifstream file("rockyou.txt");
     string password;
     PrefixTree tree;
+    HashMap map;
     for (int i = 0; i < 5; i++) {
         getline(file, password);
         tree.insert(password);
+        map.addPass(password);
     }
     file.close();
     bool continueLoop = true;
@@ -44,6 +47,13 @@ int main() {
             }
             if (inputNum == 2) {
                 //NOTE: add similar functionality for hash
+                bool hashCheck = map.checkPass(passInput);
+                if (hashCheck == true) {
+                    cout << "Password is not commonly used." << endl;
+                }
+                if (hashCheck == false) {
+                    cout << "Password is commonly used." << endl;
+                }
             }
         }
     }
