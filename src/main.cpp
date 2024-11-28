@@ -20,6 +20,7 @@ int main() {
     file.close();
     bool continueLoop = true;
     while (continueLoop) {
+        // any more menu options
         cout << "Please input a number to pick a menu option." << endl;
         cout << "1. Find Password Using Prefix Tree." << endl;
         cout << "2. Find Password Using Hash Table." << endl;
