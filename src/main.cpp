@@ -12,7 +12,7 @@ int main() {
     string password;
     PrefixTree tree;
     HashMap map(20, 0.75);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 1000; i++) {
         getline(file, password);
         tree.insert(password);
         map.addPass(password);
