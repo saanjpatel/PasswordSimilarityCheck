@@ -20,10 +20,13 @@ int main() {
     file.close();
     bool continueLoop = true;
     while (continueLoop) {
-        cout << "Please input a number to pick a menu option." << endl;
+        cout << "Menu" << endl;
+        cout << "------" << endl;
         cout << "1. Check Password Using Prefix Tree." << endl;
         cout << "2. Check Password Using Hash Table." << endl;
         cout << "3. Exit" << endl;
+        // cout << "Please input a number to pick a menu option." << endl;
+        cout << "Please enter a menu option: " << endl;
         string input;
         getline(cin, input);
         int inputNum = stoi(input);
