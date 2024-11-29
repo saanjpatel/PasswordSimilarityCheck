@@ -23,7 +23,6 @@ private:
 
 public:
     HashMap(int startCapacity, double limit);
-    int getSize();
     void resizeVec();
     void addPass(string& password);
     bool checkPass(string& password);
