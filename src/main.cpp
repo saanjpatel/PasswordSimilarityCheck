@@ -21,11 +21,14 @@ int main() {
     bool continueLoop = true;
     while (continueLoop) {
         // any more menu options
-        cout << "Please input a number to pick a menu option." << endl;
+        cout << "Menu" << endl;
+        cout << "-----" << endl;
         cout << "1. Find Password Using Prefix Tree." << endl;
         cout << "2. Find Password Using Hash Table." << endl;
         cout << "3. Find out if it is an exact match or just similar." << endl;
         cout << "4. Exit" << endl;
+        // cout << "Please input a number to pick a menu option." << endl;
+        cout << "Please enter a menu option: ";
         string input;
         getline(cin, input);
         int inputNum = stoi(input);
