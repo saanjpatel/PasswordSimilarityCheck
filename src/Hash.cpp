@@ -6,16 +6,16 @@
 #include "Hash.h"
 
 int HashMap::hashFunc(string& password) {
-        int base = 27;
-        unsigned long long hashVal = 0;
-        unsigned long long power = 1;
-        for (int i = password.length()-1; i>=0; i--) {
-            int ascii = static_cast<int>(password[i]);
-            hashVal = (hashVal +  ascii * power) % capacity;
-            power = (power * base) % capacity;
-        }
+    int base = 27;
+    unsigned long long hashVal = 0;
+    unsigned long long power = 1;
+    for (int i = password.length()-1; i>=0; i--) {
+        int ascii = static_cast<int>(password[i]);
+        hashVal = (hashVal +  ascii * power) % capacity;
+        power = (power * base) % capacity;
+    }
 
-        return hashVal;
+    return hashVal;
 
 }
 
