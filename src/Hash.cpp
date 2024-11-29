@@ -6,11 +6,11 @@
 #include "Hash.h"
 
 int HashMap::hashFunc(string& password) {
-        int base = 129;
-        int hashVal = 0;
-        int power = 1;
+        int base = 27;
+        unsigned long long hashVal = 0;
+        unsigned long long power = 1;
         for (int i = password.length()-1; i>=0; i--) {
-            int ascii = (int)password[i];
+            int ascii = static_cast<int>(password[i]);
             hashVal = (hashVal +  ascii * power) % capacity;
             power = (power * base) % capacity;
         }
