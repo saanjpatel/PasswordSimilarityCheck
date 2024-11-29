@@ -5,6 +5,7 @@
 // reference: Professor Aman's lecture slides on sets, maps, and hash tables
 #include "Hash.h"
 
+// used ASCII value and power of 27 to add each characters in the string
 int HashMap::hashFunc(string& password) {
     int base = 27;
     unsigned long long hashVal = 0;
