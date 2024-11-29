@@ -58,8 +58,12 @@ bool PrefixTree::searchString(string password) {
     return stringInTree;
 }
 void PrefixTree::deletepostOrderTraversal(Node *node) {
-    for (int i = 0; i < node->children.size(); i++) {
-        deletepostOrderTraversal(node->children.at(i));
+    if (node != nullptr) {
+        for (int i = 0; i < node->children.size(); i++) {
+            if (node->children.at(i) != nullptr) {
+                deletepostOrderTraversal(node->children.at(i));
+            }
+        }
     }
     delete node;
 }

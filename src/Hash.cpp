@@ -12,11 +12,11 @@ int HashMap::hashFunc(string& password) {
     unsigned long long power = 1;
     for (int i = password.length()-1; i>=0; i--) {
         int ascii = static_cast<int>(password[i]);
-        hashVal = (hashVal +  ascii * power) % capacity;
-        power = (power * base) % capacity;
+        hashVal = (hashVal +  ascii * power);
+        power = (power * base);
     }
 
-    return hashVal;
+    return hashVal % capacity;
 
 }
 
