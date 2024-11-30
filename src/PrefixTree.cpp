@@ -2,20 +2,25 @@
 // Created by Saanj Patel on 11/22/2024.
 //
 // referenced https://www.interviewcake.com/concept/java/trie to understand prefix tree
+// referenced Prof. Kapoor's tree and balanced tree lecture slides
 #include "PrefixTree.h"
 // referenced https://cplusplus.com/reference/string/string/?kw=string for string functions
 Node* PrefixTree::insertCharHelper(Node *node, string password, int count) {
     if (count < password.length()) {
+        // if null make new node
         if (node == nullptr) {
             node = new Node(password.at(count));
         }
+        // bool var to check if character was already inserted in following conditions
         bool insert = false;
+        // if first child is nullptr add there
         if (node->children.at(0) == nullptr) {
             node->children.at(0) = new Node(password.at(count));
             node->children.at(0) = insertCharHelper(node->children.at(0), password, count+1);
             insert = true;
         }
         if (!insert) {
+            // if already exists, go to the next one
             for (int i = 0; i < node->children.size(); i++) {
                 if (node->children.at(i)->let == password.at(count)) {
                     node->children.at(i) = insertCharHelper(node->children.at(i), password, count+1);
@@ -23,7 +28,7 @@ Node* PrefixTree::insertCharHelper(Node *node, string password, int count) {
                 }
             }
         }
-
+        // last condition insert next into vector
         if (!insert) {
             node->children.push_back(new Node(password.at(count)));
             node->children.at(node->children.size()-1) = insertCharHelper(node->children.at(node->children.size()-1), password, count+1);
@@ -38,6 +43,7 @@ bool PrefixTree::searchStringHelper(Node *node, string password, int count) {
     while (count < password.length()) {
         bool checkchar = false;
         for (int i = 0; i < node->children.size(); i++) {
+            // if found continue
             if (node->children.at(i)->let == password.at(count)) {
                 checkchar = true;
                 node = node->children.at(i);
@@ -45,11 +51,13 @@ bool PrefixTree::searchStringHelper(Node *node, string password, int count) {
                 break;
             }
         }
+        // otherwise not found return false
         if (!checkchar) {
             return false;
         }
 
     }
+    // if all characters found return true
     return true;
 
 }
@@ -58,6 +66,7 @@ bool PrefixTree::searchString(string password) {
     return stringInTree;
 }
 void PrefixTree::deletepostOrderTraversal(Node *node) {
+    // make sure to not delete null pointer if condition
     if (node != nullptr) {
         for (int i = 0; i < node->children.size(); i++) {
             if (node->children.at(i) != nullptr) {
