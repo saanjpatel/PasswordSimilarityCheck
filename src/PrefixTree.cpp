@@ -76,6 +76,50 @@ void PrefixTree::deletepostOrderTraversal(Node *node) {
     }
     delete node;
 }
+
+int PrefixTree::countVariationsHelper(Node *node, string password, int count) {
+    int numVar = 0;
+    while (count < password.length()) {
+        bool checkchar = false;
+        for (int i = 0; i < node->children.size(); i++) {
+            // if found continue
+            if (node->children.at(i)->let == password.at(count)) {
+                checkchar = true;
+                node = node->children.at(i);
+                count += 1;
+                break;
+            }
+        }
+        // otherwise not found return -1
+        if (!checkchar) {
+            return -1;
+        }
+
+    }
+    // if all characters found return variations
+    if (count == password.length()) {
+        numVar = countFromLastCharHelper(node, 0);
+    }
+    return numVar;
+
+}
+int PrefixTree::countFromLastCharHelper(Node *node, int numVar) {
+    // count number of children
+    for (int i = 0; i < node->children.size(); i++) {
+        if (node->children.at(i) != nullptr) {
+            numVar += 1;
+        }
+        // if first child is nullptr means no variations
+        if (node->children.at(i) == nullptr) {
+            return 0;
+        }
+    }
+    return numVar;
+}
+int PrefixTree::countVariations(string password) {
+    int variations = countVariationsHelper(this->root, password, 0);
+    return variations;
+}
 PrefixTree::~PrefixTree() {
     deletepostOrderTraversal(this->root);
 }

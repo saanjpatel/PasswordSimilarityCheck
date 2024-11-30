@@ -29,20 +29,21 @@ int main() {
         cout << "1. Find Password Using Prefix Tree." << endl;
         cout << "2. Find Password Using Hash Table." << endl;
         cout << "3. Find out if it is an exact match or just similar." << endl;
-        cout << "4. Exit" << endl;
+        cout << "4. Find Minimum Number of Variations Starting with Given Password using Prefix Tree." << endl;
+        cout << "5. Exit" << endl;
         cout << "Please enter a menu option:" << endl;
         // getting menu option chosen
         string input;
         getline(cin, input);
         int inputNum = stoi(input);
         // if exit
-        if (inputNum == 4) {
+        if (inputNum == 5) {
             cout << "Exited program successfully." << endl;
             continueLoop = false;
             break;
         }
         // if checking password
-        if (inputNum != 4) {
+        if (inputNum != 5) {
             cout << "Please input a password to check." << endl;
             string passInput;
             getline(cin, passInput);
@@ -98,6 +99,17 @@ int main() {
                 }
                 if (!prefixCheck and !hashCheck) {
                     cout << "Therefore, password is not found in either structure." << endl;
+                }
+            }
+            // check for variations
+            if (inputNum == 4) {
+                bool prefixCheck = tree.searchString(passInput);
+                if (prefixCheck) {
+                    cout << tree.countVariations(passInput) << " variations" << endl;
+
+                }
+                if (!prefixCheck) {
+                    cout << "No variations." << endl;
                 }
             }
         }
