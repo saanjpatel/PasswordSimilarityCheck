@@ -3,6 +3,7 @@ using namespace std;
 #include <fstream>
 #include "PrefixTree.h"
 #include "Hash.h"
+#include <chrono>
 //
 // Created by Saanj Patel on 11/22/2024.
 //
@@ -13,12 +14,26 @@ int main() {
     // create instances of prefix tree and hashmap
     PrefixTree tree;
     HashMap map(20, 0.75);
+    //start insertion timer for prefix tree
+    auto startP = chrono::high_resolution_clock::now();
     // insert both for first 100,000
     for (int i = 0; i < 100000; i++) {
         getline(file, password);
         tree.insert(password);
+    }
+    //end insertion timer for prefix tree
+    auto endP = chrono::high_resolution_clock::now();
+    auto PrefixTime = chrono::duration_cast<chrono::nanoseconds>(endP - startP).count();
+
+    //start insertion timer for hash table
+    auto startH = chrono::high_resolution_clock::now();
+    for (int i = 0; i < 100000; i++) {
+        getline(file, password);
         map.addPass(password);
     }
+    //end insertion timer for hash table
+    auto endH = chrono::high_resolution_clock::now();
+    auto HashTime = chrono::duration_cast<chrono::nanoseconds>(endH - startH).count();
     file.close();
     bool continueLoop = true;
     // menu options loop
@@ -30,20 +45,26 @@ int main() {
         cout << "2. Find Password Using Hash Table." << endl;
         cout << "3. Find out if it is an exact match or just similar." << endl;
         cout << "4. Find Minimum Number of Variations Starting with Given Password using Prefix Tree." << endl;
-        cout << "5. Exit" << endl;
+        cout << "5. Find the Amount of Time for Inserting data into the Prefix Tree and Hash Table" << endl;
+        cout << "6. Exit" << endl;
         cout << "Please enter a menu option:" << endl;
         // getting menu option chosen
         string input;
         getline(cin, input);
         int inputNum = stoi(input);
         // if exit
-        if (inputNum == 5) {
+        if (inputNum == 6) {
             cout << "Exited program successfully." << endl;
             continueLoop = false;
             break;
         }
+        //if finding insertion time
+        if (inputNum == 5){
+            cout << "Time taken to insert into prefix tree: " << PrefixTime <<"ns"<< endl;
+            cout << "Time taken to insert into hash table: " << HashTime <<"ns"<< endl;
+        }
         // if checking password
-        if (inputNum != 5) {
+        if (inputNum != 6 && inputNum != 5) {
             cout << "Please input a password to check." << endl;
             string passInput;
             getline(cin, passInput);
@@ -52,7 +73,6 @@ int main() {
                 bool prefixCheck = tree.searchString(passInput);
                 if (prefixCheck) {
                     cout << "Password was found." << endl;
-
                 }
                 if (!prefixCheck) {
                     cout << "Password was not found." << endl;
@@ -112,6 +132,7 @@ int main() {
                     cout << "No variations." << endl;
                 }
             }
+
         }
     }
 }
