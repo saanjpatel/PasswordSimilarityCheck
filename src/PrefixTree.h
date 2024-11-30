@@ -24,9 +24,12 @@ private:
     Node* insertCharHelper(Node* node, string password, int count);
     bool searchStringHelper(Node* node, string password, int count);
     void deletepostOrderTraversal(Node* node);
+    int countVariationsHelper(Node* node, string password, int count);
+    int countFromLastCharHelper(Node* node, int numVar);
 public:
     void insert(string password);
     bool searchString(string password);
+    int countVariations(string password);
     ~PrefixTree();
 };
 #endif //PASSWORDSIMILARITYCHECK_PREFIXTREE_H
