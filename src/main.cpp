@@ -25,6 +25,10 @@ int main() {
     auto endP = chrono::high_resolution_clock::now();
     auto PrefixTime = chrono::duration_cast<chrono::nanoseconds>(endP - startP).count();
 
+    //clear flags and go back to the beginning of the file for reading
+    file.clear();
+    file.seekg(0, ios::beg);
+
     //start insertion timer for hash table
     auto startH = chrono::high_resolution_clock::now();
     for (int i = 0; i < 100000; i++) {
