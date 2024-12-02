@@ -50,14 +50,15 @@ int main() {
         cout << "3. Find out if it is an exact match or just similar." << endl;
         cout << "4. Find Minimum Number of Variations Starting with Given Password using Prefix Tree." << endl;
         cout << "5. Find the Amount of Time for Inserting data into the Prefix Tree and Hash Table" << endl;
-        cout << "6. Exit" << endl;
+        cout << "6. Find the amount of time it takes to check 10000 passwords" << endl;
+        cout << "7. Exit" << endl;
         cout << "Please enter a menu option:" << endl;
         // getting menu option chosen
         string input;
         getline(cin, input);
         int inputNum = stoi(input);
         // if exit
-        if (inputNum == 6) {
+        if (inputNum == 7) {
             cout << "Exited program successfully." << endl;
             continueLoop = false;
             break;
@@ -67,8 +68,42 @@ int main() {
             cout << "Time taken to insert into prefix tree: " << PrefixTime <<"ns"<< endl;
             cout << "Time taken to insert into hash table: " << HashTime <<"ns"<< endl;
         }
+        if(inputNum == 6){
+            int checks = 10000; //amount of passwords to be checked
+
+            ifstream testFile("rockyou.txt");
+            //store all the test passwords in vector
+            vector<string> testPasswords;
+            string testPassword;
+
+            //iterate through the file and add the first 10000 to the vector
+            for(int i = 0; i < checks && getline(testFile, testPassword); i++){
+                testPasswords.push_back(testPassword);
+            }
+            testFile.close();
+
+            // Measure time for prefix tree lookups
+            auto startPrefix = chrono::high_resolution_clock::now();
+            for (const string& pass : testPasswords) {
+                tree.searchString(pass);
+            }
+            auto endPrefix = chrono::high_resolution_clock::now();
+            auto prefixCheckTime = chrono::duration_cast<chrono::nanoseconds>(endPrefix - startPrefix).count();
+
+            // Measure time for hash table lookups
+            auto startHash = chrono::high_resolution_clock::now();
+            for (string& pass : testPasswords) {
+                map.checkPass(pass);
+            }
+            auto endHash = chrono::high_resolution_clock::now();
+            auto hashCheckTime = chrono::duration_cast<chrono::nanoseconds>(endHash - startHash).count();
+
+
+            cout << "Time taken to check 10000 passwords using Prefix Tree: "<< prefixCheckTime << "ns" << endl;
+            cout << "Time taken to check 10000 passwords using Hash Table: "<< hashCheckTime << "ns" << endl;
+        }
         // if checking password
-        if (inputNum != 6 && inputNum != 5) {
+        if (inputNum != 7 && inputNum != 5 && inputNum != 6) {
             cout << "Please input a password to check." << endl;
             string passInput;
             getline(cin, passInput);
