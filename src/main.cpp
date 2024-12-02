@@ -44,7 +44,7 @@ int main() {
         }
         // if checking password
         if (inputNum != 5) {
-            cout << "Please input a password to check." << endl;
+            cout << "Please input a password to check:" << endl;
             string passInput;
             getline(cin, passInput);
             // use prefix tree
@@ -60,7 +60,6 @@ int main() {
             }
             // use hashmap
             if (inputNum == 2) {
-                //NOTE: add similar functionality for hash
                 bool hashCheck = map.checkPass(passInput);
                 if (hashCheck == true) {
                     cout << "Password was found." << endl;
