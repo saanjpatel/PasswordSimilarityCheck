@@ -34,6 +34,7 @@ HashMap::HashMap(int startCapacity, double limit) {
 
 // adds a password into the hash map and resize if it is greater than or equal to the load factor
 void HashMap::addPass(string &password) {
+
     if ((double)numElements / (double)capacity >= loadFactor) {
         resizeVec();
     }
@@ -44,6 +45,7 @@ void HashMap::addPass(string &password) {
     vecNodes[hashCode].password = password;
     vecNodes[hashCode].notVacant = true;
     numElements++;
+
 }
 
 // checks if the password entered by the user matches with any password from the dataset
