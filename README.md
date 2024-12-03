@@ -1,6 +1,10 @@
-<H1> COP3530 - Project 3 </h1>
-This is the template for Project 3 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
+Instructions For Running the Code: 
 
+Clone the repository and download the data file at this link: https://www.kaggle.com/datasets/wjburns/common-password-list-rockyoutxt.
+Put the downloaded data file into cmake-build-debug folder in clion. The CMakeList.txt is given in the repository. Just putting the data file into cmake-build-debug should make it work.
+
+This is the template for Project 3 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
+<H1> COP3530 - Project 3 </h1>
 <h2> Table of Contents </h2>
 
 - [Documentation and resources on how to use GitHub for Project 3](#documentation-and-resources-on-how-to-use-github-for-project-3)
